@@ -2,13 +2,12 @@
 
 import { ApolloClientProvider } from "@/graphql/apollo_provider";
 import { SearchPokemon } from "@/components/pokemon_detail";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { MoreDetail } from "@/components/more_detail";
 import { useQuery } from "@apollo/client/react";
 import { GET_POKEMON } from "@/graphql/queries";
 import { PokemonData } from "@/types/pokemon_type";
-
 
 interface PokemonVars {
   name: string;
@@ -101,7 +100,9 @@ function MainContent() {
 export default function Home() {
   return (
     <ApolloClientProvider>
-      <MainContent />
+      <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-gray-500">Loading...</div>}>
+        <MainContent />
+      </Suspense>
     </ApolloClientProvider>
   );
 }
