@@ -8,7 +8,7 @@ import { MoreDetail } from "@/components/more_detail";
 import { useQuery } from "@apollo/client/react";
 import { GET_POKEMON } from "@/graphql/queries";
 import { PokemonData } from "@/types/pokemon_type";
-import { connection } from "next/server";
+
 
 interface PokemonVars {
   name: string;
@@ -98,8 +98,7 @@ function MainContent() {
   );
 }
 
-export default async function Home() {
-  await connection()
+export default function Home() {
   return (
     <ApolloClientProvider>
       <MainContent />
